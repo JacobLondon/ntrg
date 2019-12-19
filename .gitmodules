@@ -1,0 +1,3 @@
+[submodule "nce"]
+	path = nce
+	url = https://github.com/JacobLondon/nce

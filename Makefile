@@ -1,7 +1,8 @@
 CC=clang
 TARGET=ntrg
-CFLAGS=-std=c11 -Ince/ -march=native -lncurses
+CFLAGS=-std=c11 -Ince/ -Ijlib/include/ -march=native -lncurses
 OBJ_FILES=main.o
+INC_FILES=jlib/include/
 
 .PHONY: clean
 

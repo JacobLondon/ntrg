@@ -1,3 +1,6 @@
 [submodule "nce"]
 	path = nce
 	url = https://github.com/JacobLondon/nce
+[submodule "jlib"]
+	path = jlib
+	url = https://github.com/JacobLondon/jlib

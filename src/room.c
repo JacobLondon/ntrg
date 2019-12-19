@@ -1,5 +1,3 @@
-
-
 #include "room.h"
 
 struct room *room_new(int x, int y, int w, int h)

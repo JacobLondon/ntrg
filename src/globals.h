@@ -11,8 +11,9 @@ enum Constants {
     CharFloor = '.',
 };
 
-int px = 0, py = 0;
-bool redraw = true;
-struct room *Rooms[NumRooms] = {0};
+extern int px;
+extern int py;
+extern bool redraw;
+extern struct room *Rooms[NumRooms];
 
 #endif // NTRG_GLOBALS_H

@@ -3,6 +3,10 @@
 #include "player.h"
 #include "room.h"
 
+/**
+ * Use required fns by NCE
+ */
+
 void nce_resize(int sig)
 {
 
@@ -10,10 +14,11 @@ void nce_resize(int sig)
 
 void nce_startup()
 {
+    // spawn player and initial rooms
     Player.pos.x = 7;
     Player.pos.y = 7;
     Rooms[0] = room_new(5, 5, 10, 10);
-    Rooms[1] = room_new(30, 30, 10, 12);
+    Rooms[1] = room_new(20, 20, 10, 12);
 }
 
 void nce_update()
@@ -36,5 +41,6 @@ int main()
 {
     nce_init();
 
+    // TODO: Collect leaked memory from globals
     return 0;
 }

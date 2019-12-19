@@ -7,8 +7,18 @@ STATIC_LIBS=jlib/jlib.a nce/nce.a
 
 .PHONY: clean
 
-$(TARGET) : $(OBJ_FILES) $(STATIC_LIBS)
-	$(CC) -o $@ $^ $(CFLAGS)
+all: subsystem main
+
+subsystem:
+	$(MAKE) -C jlib
+	$(MAKE) -C nce
+
+main: $(OBJ_FILES) $(STATIC_LIBS)
+	$(CC) -o $(TARGET) $^ $(CFLAGS)
 
 clean:
 	rm -rf $(TARGET) $(OBJ_FILES)
+
+subclean:
+	$(MAKE) clean -C jlib
+	$(MAKE) clean -C nce

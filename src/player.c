@@ -3,7 +3,7 @@
 
 void player_move(struct player *self, struct position new)
 {
-    // clear old pos, get new, draw new pos
+    // clear old pos, get new character the player is on top of, draw new pos
     switch (mvinch(new.x, new.y)) {
     case C_WALL:
         break;

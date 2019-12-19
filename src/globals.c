@@ -1,6 +1,7 @@
 #include "globals.h"
 
-int px = 0;
-int py = 0;
-bool redraw = true;
-struct room *Rooms[NumRooms] = {0};
+#include "player.h"
+#include "room.h"
+
+struct player Player = PLAYER_NEW(0, 0);
+struct room *Rooms[NUM_ROOMS] = {0};

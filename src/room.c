@@ -2,8 +2,8 @@
 
 struct room *room_new(int x, int y, int w, int h)
 {
-    if (w > RoomSize || h > RoomSize) {
-        fprintf(stderr, "Room width=%d and height=%d but max dimension=%d\n", w, h, RoomSize);
+    if (w > ROOM_SIZE || h > ROOM_SIZE) {
+        fprintf(stderr, "Room width=%d and height=%d but max dimension=%d\n", w, h, ROOM_SIZE);
         exit(-1);
     }
 
@@ -18,9 +18,9 @@ struct room *room_new(int x, int y, int w, int h)
         for (int j = 0; j < h; j++) {
             self->buf[i][j] = 0;
             if (i == 0 || j == 0 || i == w - 1 || j == h - 1)
-                self->buf[i][j] = CharWall;
+                self->buf[i][j] = C_WALL;
             else
-                self->buf[i][j] = CharFloor;
+                self->buf[i][j] = C_FLOOR;
         }
     }
 

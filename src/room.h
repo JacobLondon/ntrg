@@ -5,7 +5,7 @@
 
 struct room {
     int x, y, w, h;
-    char buf[RoomSize][RoomSize];
+    char buf[ROOM_SIZE][ROOM_SIZE];
 };
 
 struct room *room_new(int x, int y, int w, int h);

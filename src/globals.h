@@ -5,15 +5,13 @@
 #include <nce.h>
 
 enum Constants {
-    NumRooms = 16,
-    RoomSize = 16,
-    CharWall = '#',
-    CharFloor = '.',
+    NUM_ROOMS = 16,
+    ROOM_SIZE = 16,
+    C_WALL = '#',
+    C_FLOOR = '.',
 };
 
-extern int px;
-extern int py;
-extern bool redraw;
-extern struct room *Rooms[NumRooms];
+extern struct player Player;
+extern struct room *Rooms[NUM_ROOMS];
 
 #endif // NTRG_GLOBALS_H

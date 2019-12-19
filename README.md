@@ -27,7 +27,7 @@ $ make
 ```
 
 # Game
-Press `wasd` to move, and `ctrl+c` or `ESC` to exit.
+Run `./ntrg`. Press `wasd` to move, and `ctrl+c` or `ESC` to exit.
 ```
 ##########
 #........#

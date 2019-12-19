@@ -5,21 +5,21 @@
  * Game requirements
  */
 
+enum Constants {
+    NumRooms = 16,
+    RoomSize = 16,
+};
 
 struct room {
     int x, y, w, h;
-    char **buf;
-};
-
-enum Constants {
-    NumRooms = 16,
+    char buf[RoomSize + 1][RoomSize + 1];
 };
 
 // Globals
 int px = 0, py = 0;
 bool redraw = true;
-char *CharWall = "#";
-char *CharFloor = ".";
+char CharWall = '#';
+char CharFloor = '.';
 struct room *Rooms[NumRooms] = {0};
 
 struct room *room_new(int x, int y, int w, int h);
@@ -34,13 +34,15 @@ struct room *room_new(int x, int y, int w, int h)
     self->w = w;
     self->h = h;
 
-    for (int i = 0; i < w; i++) {
-        self->buf[i] = hstring_lit("");
-        for (int j = 0; j < h; j++) {
-            if (i == 0 || j == 0 || i == w - 1 || j == h - 1)
-                buildcat(self->buf[i], CharWall);
+    for (int i = 0; i <= w; i++) {
+        for (int j = 0; j <= h; j++) {
+            self->buf[i][j] = 0;
+            if (i == w)
+                continue;
+            if (i == 0 || j == 0 || i == w - 1 || j == h)
+                self->buf[i][j] = CharWall;
             else
-                buildcat(self->buf[i], CharFloor);
+                self->buf[i][j] = CharFloor;
         }
     }
 
@@ -50,7 +52,7 @@ struct room *room_new(int x, int y, int w, int h)
 void room_draw(struct room *self)
 {
     for (int i = 0; i < self->w; i++) {
-        nce_write(self->buf[i], self->x + i, self->y);
+        nce_write(self->buf[i], self->x, self->y + i);
     }
 }
 
@@ -71,20 +73,17 @@ void nce_startup()
 
 void nce_update()
 {
+    // draw rooms
+    for (int i = 0; i < NumRooms; i++) {
+        if (Rooms[i]) room_draw(Rooms[i]);
+    }
+
     // move with bounds check
     if      (nce_keypressed(Keys, 'w')) nce_write(" ", px,   py - 1 >= 0 ? py-- : py);
     else if (nce_keypressed(Keys, 'a')) nce_write(" ", px - 1 >= 0 ? px-- : px,   py);
     else if (nce_keypressed(Keys, 's')) nce_write(" ", px,   py + 1 < SHeight ? py++ : py);
     else if (nce_keypressed(Keys, 'd')) nce_write(" ", px + 1 < SWidth ? px++ : px, py);
     nce_write("@", px, py);
-
-    // draw rooms
-    if (redraw) {
-        for (int i = 0; i < NumRooms; i++) {
-            if (Rooms[i]) room_draw(Rooms[i]);
-        }
-        redraw = false;
-    }
 }
 
 int main()

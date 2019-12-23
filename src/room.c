@@ -42,18 +42,20 @@ static int rand_choice(int min, int max)
 
 void room_gen_door(struct room *self)
 {
-    // choose wall
-    int wallx, wally, choice = rand_choice(0, 3);
+    if (self->door_count > DIRECTION_COUNT) {
+        fprintf(stderr, "Too many doors: %d", self->door_count);
+        exit(-1);
+    }
+    // choose wall, 4
+    int wallx, wally, choice = rand_choice(0, DIRECTION_COUNT - 1);
     switch (choice) {
-    case 0: wallx = 0;       wally = rand_choice(0, self->h); // left wall
-    case 1: wallx = self->w; wally = rand_choice(0, self->h); // right wall
-    case 2: wallx = rand_choice(0, self->w); wally = 0;       // top wall
-    case 3: wallx = rand_choice(0, self->w); wally = self->h; // bottom wall
+    case NORTH: wallx = rand_choice(0, self->w); wally = 0;       // top wall
+    case EAST: wallx = self->w; wally = rand_choice(0, self->h); // right wall
+    case SOUTH: wallx = rand_choice(0, self->w); wally = self->h; // bottom wall
+    case WEST: wallx = 0;       wally = rand_choice(0, self->h); // left wall
     default:
         fprintf(stderr, "Invalid random choice %d\n", choice);
         exit(-1);
     }
-    
-    
 
 }

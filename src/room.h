@@ -6,7 +6,7 @@
 struct room {
     int x, y, w, h;
     char buf[ROOM_SIZE][ROOM_SIZE];
-    int doors[4], door_dir[4];
+    unsigned doors[4], door_dir[4], door_count;
 };
 
 enum direction {
@@ -14,6 +14,7 @@ enum direction {
     EAST,
     SOUTH,
     WEST,
+    DIRECTION_COUNT,
 };
 
 struct room *room_new(int x, int y, int w, int h);
